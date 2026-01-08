@@ -1,0 +1,110 @@
+/* PAGE */
+.container {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  background-color: #f5f7fa;
+  min-height: 100vh;
+}
+
+/* HEADER */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #1e293b;
+  color: white;
+  padding: 15px 25px;
+  border-radius: 8px;
+  margin-bottom: 25px;
+}
+
+.header h2 {
+  margin: 0;
+}
+
+.top-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.nav-btn {
+  background: #0ea5e9;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.nav-btn:hover {
+  background: #0284c7;
+}
+
+/* PRODUCT GRID */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+/* CARD */
+.card {
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  text-align: center;
+  transition: transform 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card h3 {
+  margin-bottom: 8px;
+}
+
+.card p {
+  font-size: 18px;
+  font-weight: bold;
+  color: #16a34a;
+}
+
+/* ICON BUTTONS */
+.icons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin: 12px 0;
+}
+
+.icon-btn {
+  background: #f1f5f9;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.icon-btn:hover {
+  background: #e2e8f0;
+}
+
+/* BUY BUTTON */
+.buy-btn {
+  background: #22c55e;
+  color: white;
+  border: none;
+  padding: 10px;
+  width: 100%;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.buy-btn:hover {
+  background: #16a34a;
+}

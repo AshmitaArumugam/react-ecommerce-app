@@ -1,24 +1,40 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import { Routes, Route } from "react-router-dom";
+import ProductPage from "./ProductPage";
+import CartPage from "./CartPage";
+import WishlistPage from "./WishlistPage";
+import OrderPage from "./OrderPage";
 
 function App() {
+  const [cart, setCart] = useState([]);
+  const [wishlist, setWishlist] = useState([]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Routes>
+      <Route
+        path="/"
+        element={
+          <ProductPage
+            cart={cart}
+            setCart={setCart}
+            wishlist={wishlist}
+            setWishlist={setWishlist}
+          />
+        }
+      />
+      <Route
+        path="/cart"
+        element={<CartPage cart={cart} />}
+      />
+      <Route
+        path="/wishlist"
+        element={<WishlistPage wishlist={wishlist} />}
+      />
+      <Route
+        path="/order"
+        element={<OrderPage />}
+      />
+    </Routes>
   );
 }
 

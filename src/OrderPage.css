@@ -1,0 +1,38 @@
+.order-container {
+  max-width: 500px;
+  margin: 30px auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+}
+
+.product-summary {
+  background: #f9f9f9;
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+}
+
+.order-form label {
+  display: block;
+  margin-top: 10px;
+}
+
+.order-form input,
+.order-form textarea {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+}
+
+.order-form button {
+  margin-top: 20px;
+  width: 100%;
+  padding: 12px;
+  background-color: #2ecc71;
+  border: none;
+  color: white;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+}
