@@ -15,7 +15,7 @@ import ResetPassword from "./pages/ResetPassword";
 
 
 // Protected Route
-import ProtectedRoute from "./ProtectedRoute";
+//import ProtectedRoute from "./ProtectedRoute";
 
 function App() {
   const [cart, setCart] = useState([]);
