@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { signup } from "../api/authApi";
+import "../Auth.css";
 
 export default function Signup() {
   const navigate = useNavigate();
@@ -9,19 +9,13 @@ export default function Signup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSignup = async () => {
+  const handleSignup = () => {
     if (!name || !email || !password) {
       alert("All fields required");
       return;
     }
 
-    const res = await signup(name, email, password);
-
-    if (res.message === "User registered successfully") {
-      navigate("/");
-    } else {
-      alert(res.message);
-    }
+    navigate("/");
   };
 
   return (

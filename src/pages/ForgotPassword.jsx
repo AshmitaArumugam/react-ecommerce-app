@@ -1,42 +1,36 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { sendOtp } from "../api/authApi";
+import "../Auth.css";
 
 export default function ForgotPassword() {
   const [email, setEmail] = useState("");
-  const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  const handleSendOtp = async () => {
-  try {
-    const res = await sendOtp(email);
-
-    if (res.message && res.message.includes("OTP")) {
-      navigate("/verify-otp", { state: { email } });
-    } else {
-      setError(res.message || "Failed to send OTP");
+  const handleSendOtp = () => {
+    if (!email) {
+      alert("Enter email");
+      return;
     }
-  } catch {
-    setError("Server error");
-  }
-};
 
+    navigate("/verify-otp", { state: { email } });
+  };
 
   return (
     <div className="auth-wrapper">
       <div className="auth-card">
         <h2>Forgot Password</h2>
+        <p>We’ll send an OTP to your email</p>
 
         <input
           placeholder="Email"
           onChange={(e) => setEmail(e.target.value)}
         />
 
-        {error && <p className="error">{error}</p>}
-
         <button onClick={handleSendOtp}>Send OTP</button>
 
-        <Link to="/">Back to Login</Link>
+        <p className="switch">
+          <Link to="/">Back to Login</Link>
+        </p>
       </div>
     </div>
   );

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { login } from "../api/authApi";
+import "../Auth.css";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -10,7 +10,6 @@ export default function Login() {
   const [loading, setLoading] = useState(false);
 
   const handleLogin = async () => {
-    // Frontend validation
     if (!email.trim() || !password.trim()) {
       alert("Please enter email and password");
       return;
@@ -19,44 +18,12 @@ export default function Login() {
     try {
       setLoading(true);
 
-      const response = await fetch(`${API_BASE_URL}/login`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: email.trim(),
-          password: password.trim(),
-        }),
-      });
+      // TEMP success simulation (replace with real API later)
+      localStorage.setItem("token", "demo-token");
 
-      const data = await response.json();
-
-      // Success
-      if (response.ok && data.token) {
-        localStorage.setItem("token", data.token);
-
-        // optional: store role if needed
-        if (data.role) {
-          localStorage.setItem("role", data.role);
-        }
-
-        navigate("/dashboard");
-        return;
-      }
-
-      // Specific backend errors
-      if (response.status === 404) {
-        alert("Account does not exist. Please sign up.");
-      } else if (response.status === 401) {
-        alert("Incorrect password. Try again.");
-      } else {
-        alert(data.message || "Login failed");
-      }
-
-    } catch (error) {
-      console.error("Login error:", error);
-      alert("Server error. Please try again later.");
+      navigate("/products"); // 👈 ProductPage route
+    } catch (err) {
+      alert("Login failed");
     } finally {
       setLoading(false);
     }
@@ -73,7 +40,6 @@ export default function Login() {
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          disabled={loading}
         />
 
         <input
@@ -81,20 +47,13 @@ export default function Login() {
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          disabled={loading}
         />
 
-        <Link to="/forgot-password" className="link-right">
-          Forgot Password?
-        </Link>
+        <div className="auth-links">
+          <Link to="/forgot-password">Forgot Password?</Link>
+        </div>
 
-        <button
-          onClick={handleLogin}
-          disabled={loading}
-          className={`w-full text-white py-2 rounded ${
-            loading ? "bg-gray-400" : "bg-indigo-600"
-          }`}
-        >
+        <button onClick={handleLogin} disabled={loading}>
           {loading ? "Logging in..." : "Login"}
         </button>
 

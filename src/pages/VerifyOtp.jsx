@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { verifyOtp } from "../api/authApi";
+import "../Auth.css";
 
 export default function VerifyOtp() {
   const [otp, setOtp] = useState("");
@@ -9,35 +9,28 @@ export default function VerifyOtp() {
 
   const email = location.state?.email;
 
-  // ✅ Redirect SAFELY after render
   useEffect(() => {
     if (!email) {
       navigate("/forgot-password");
     }
   }, [email, navigate]);
 
-  const handleVerify = async () => {
-    try {
-      const res = await verifyOtp(email, otp);
-
-      if (res.token) {
-        localStorage.setItem("resetToken", res.token);
-        navigate("/reset-password");
-      } else {
-        alert(res.message || "Invalid OTP");
-      }
-    } catch (err) {
-      alert("Server error");
+  const handleVerify = () => {
+    if (!otp) {
+      alert("Enter OTP");
+      return;
     }
+
+    navigate("/reset-password");
   };
 
-  // Prevent rendering until email exists
   if (!email) return null;
 
   return (
     <div className="auth-wrapper">
       <div className="auth-card">
         <h2>Verify OTP</h2>
+        <p>Enter the OTP sent to your email</p>
 
         <input
           placeholder="Enter OTP"
