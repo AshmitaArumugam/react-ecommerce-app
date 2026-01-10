@@ -2,7 +2,9 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../Auth.css";
 
+
 export default function Login({ setNotifications }) {
+
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
@@ -17,6 +19,7 @@ export default function Login({ setNotifications }) {
 
     try {
       setLoading(true);
+
 
       // ✅ Simulate successful login
       localStorage.setItem("token", "demo-token");
@@ -33,6 +36,12 @@ export default function Login({ setNotifications }) {
 
       // ✅ Redirect to dashboard/products
       navigate("/products");
+
+      // TEMP success simulation (replace with real API later)
+      localStorage.setItem("token", "demo-token");
+
+      navigate("/products"); // 👈 ProductPage route
+
     } catch (err) {
       alert("Login failed");
     } finally {
