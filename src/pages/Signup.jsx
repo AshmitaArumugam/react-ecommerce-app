@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../Auth.css";
+import { signup } from "../api/authApi";
 
 export default function Signup() {
   const navigate = useNavigate();
@@ -9,13 +10,25 @@ export default function Signup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSignup = () => {
-    if (!name || !email || !password) {
+  const handleSignup = async () => {
+    if (!name.trim() || !email.trim() || !password.trim()) {
       alert("All fields required");
       return;
     }
 
-    navigate("/");
+    try {
+      const data = await signup(name, email, password);
+
+      if (data.message === "User registered successfully") {
+        alert("Signup successful! Please login.");
+        navigate("/");
+      } else {
+        alert(data.message || "Signup failed");
+      }
+    } catch (error) {
+      console.error("Signup error:", error);
+      alert("Server error. Please try again later.");
+    }
   };
 
   return (
@@ -26,17 +39,20 @@ export default function Signup() {
 
         <input
           placeholder="Full Name"
+          value={name}
           onChange={(e) => setName(e.target.value)}
         />
 
         <input
           placeholder="Email"
+          value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
 
         <input
           type="password"
           placeholder="Password"
+          value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
 

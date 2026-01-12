@@ -1,10 +1,9 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../Auth.css";
+import { login } from "../api/authApi";
 
-
-export default function Login({ setNotifications }) {
-
+export default function Login() {
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
@@ -20,30 +19,22 @@ export default function Login({ setNotifications }) {
     try {
       setLoading(true);
 
+      const data = await login(email, password);
 
-      // ✅ Simulate successful login
-      localStorage.setItem("token", "demo-token");
+      if (!data.token) {
+        alert(data.message || "Login failed");
+        return;
+      }
 
-      // 🔔 ADD LOGIN NOTIFICATION (THIS IS THE KEY PART)
-      setNotifications((prev) => [
-        {
-          id: Date.now(),
-          message: "Logged in successfully 🎉",
-          time: new Date().toLocaleTimeString(),
-        },
-        ...prev,
-      ]);
+      // ✅ ONLY save token
+      localStorage.setItem("token", data.token);
 
-      // ✅ Redirect to dashboard/products
+      // ✅ App.js will handle notifications
       navigate("/products");
 
-      // TEMP success simulation (replace with real API later)
-      localStorage.setItem("token", "demo-token");
-
-      navigate("/products"); // 👈 ProductPage route
-
     } catch (err) {
-      alert("Login failed");
+      console.error("Login error:", err);
+      alert("Server error. Please try again later.");
     } finally {
       setLoading(false);
     }

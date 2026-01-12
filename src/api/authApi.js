@@ -1,8 +1,9 @@
-const BASE_URL = "https://ngwe3wd9hi.execute-api.us-east-2.amazonaws.com/dev";
+const BASE_URL = "https://et6y8ghwxj.execute-api.us-east-2.amazonaws.com";
+const fpass_BASE_URL = "https://ngwe3wd9hi.execute-api.us-east-2.amazonaws.com/dev";
 
 /* ===================== SIGNUP ===================== */
 export const signup = async (name, email, password) => {
-  const res = await fetch(`${BASE_URL}/register`, {
+  const res = await fetch(`${BASE_URL}/register_user`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -32,10 +33,9 @@ export const login = async (email, password) => {
 
   return res.json();
 };
-
 /* ===================== FORGOT PASSWORD (SEND OTP) ===================== */
 export const sendOtp = async (email) => {
-  const res = await fetch(`${BASE_URL}/forget-password`, {
+  const res = await fetch(`${fpass_BASE_URL}/forget-password`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -50,7 +50,7 @@ export const sendOtp = async (email) => {
 
 /* ===================== VERIFY OTP ===================== */
 export const verifyOtp = async (email, otp) => {
-  const res = await fetch(`${BASE_URL}/verify-otp`, {
+  const res = await fetch(`${fpass_BASE_URL}/verify-otp`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -66,7 +66,7 @@ export const verifyOtp = async (email, otp) => {
 
 /* ===================== RESET PASSWORD ===================== */
 export const updatePassword = async (token, newPassword) => {
-  const res = await fetch(`${BASE_URL}/reset-pass`, {
+  const res = await fetch(`${fpass_BASE_URL}/reset-pass`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
